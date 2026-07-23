@@ -7,6 +7,7 @@
 #include "Logging/LogMacros.h"
 #include "FreyaMathWorkCharacter.generated.h"
 
+class UMathComponent;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputAction;
@@ -14,10 +15,7 @@ struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
-/**
- *  A simple player-controllable third person character
- *  Implements a controllable orbiting camera
- */
+
 UCLASS(abstract)
 class AFreyaMathWorkCharacter : public ACharacter
 {
@@ -30,6 +28,9 @@ class AFreyaMathWorkCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FollowCamera;
+
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly,meta=(AllowPrivateAccess = "true"))
+	TObjectPtr<UMathComponent> MathComponent;
 	
 protected:
 
