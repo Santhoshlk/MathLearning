@@ -3,6 +3,8 @@
 
 #include "Math/MathComponent.h"
 
+#include "MathHelper.h"
+
 
 UMathComponent::UMathComponent()
 {
@@ -16,7 +18,7 @@ UMathComponent::UMathComponent()
 void UMathComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
+   Debug::PrintMessage(TEXT("Debug Works"));
 }
 
 
