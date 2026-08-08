@@ -7,12 +7,19 @@
 #include "MathComponent.generated.h"
 
 
+class AMathActor;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class FREYAMATHWORK_API UMathComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
+   UPROPERTY(EditAnywhere,BlueprintReadOnly,meta=(AllowPrivateAccess = "true"),Category = "math")
+	TObjectPtr<AMathActor> Actor1;
 
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,meta=(AllowPrivateAccess = "true"),Category = "math")
+	TObjectPtr<AMathActor> Actor2;
+	
 protected:
 	
 	virtual void BeginPlay() override;
