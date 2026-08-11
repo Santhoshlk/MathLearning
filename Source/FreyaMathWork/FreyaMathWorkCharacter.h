@@ -50,6 +50,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* MouseLookAction;
 
+	UPROPERTY(EditDefaultsOnly,Category="Input")
+	TObjectPtr<UInputAction> FacingTriggerAction;
+
 public:
 
 	/** Constructor */
@@ -67,6 +70,9 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+
+	//bind that with a func
+	void Facing(const FInputActionValue& Value);
 
 public:
 

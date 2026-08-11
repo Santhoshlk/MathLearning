@@ -65,6 +65,7 @@ void AFreyaMathWorkCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AFreyaMathWorkCharacter::Look);
+		EnhancedInputComponent->BindAction(FacingTriggerAction,ETriggerEvent::Started,this,&AFreyaMathWorkCharacter::Facing);
 	}
 	else
 	{
@@ -88,6 +89,14 @@ void AFreyaMathWorkCharacter::Look(const FInputActionValue& Value)
 
 	// route the input
 	DoLook(LookAxisVector.X, LookAxisVector.Y);
+}
+
+void AFreyaMathWorkCharacter::Facing(const FInputActionValue& Value)
+{
+	if (MathComponent)
+	{
+		MathComponent->FacingTrigger();
+	}
 }
 
 void AFreyaMathWorkCharacter::DoMove(float Right, float Forward)

@@ -23,10 +23,13 @@ class FREYAMATHWORK_API UMathComponent : public UActorComponent
 protected:
 	
 	virtual void BeginPlay() override;
-
+	UPROPERTY();
+	AActor* Owner;
+     
 public:	
 	UMathComponent();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	void FacingTrigger();
 		
 };
