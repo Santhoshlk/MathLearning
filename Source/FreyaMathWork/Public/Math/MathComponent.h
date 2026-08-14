@@ -20,6 +20,8 @@ class FREYAMATHWORK_API UMathComponent : public UActorComponent
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,meta=(AllowPrivateAccess = "true"),Category = "math")
 	TObjectPtr<AMathActor> Actor2;
 	
+	void LocalToWorld();
+	void WorldToLocal();
 protected:
 	
 	virtual void BeginPlay() override;
@@ -31,5 +33,6 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void FacingTrigger();
+	
 		
 };

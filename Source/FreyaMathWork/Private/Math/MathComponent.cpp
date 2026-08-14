@@ -15,6 +15,49 @@ UMathComponent::UMathComponent()
 }
 
 
+void UMathComponent::LocalToWorld()
+{
+	// first of all lets see that the local coordinate of forward scaled and converted equals
+	// direct world
+	FVector local = FVector(10.f,0.f,0.f);
+	// convert into world
+	FTransform ActorsTransform = Owner->GetActorTransform();
+		ActorsTransform.RemoveScaling();
+
+	// now u can convert it into world
+	FVector WorldPosition = ActorsTransform.TransformPosition(local);
+
+	FVector ActualPosition = Owner->GetActorLocation()+Owner->GetActorForwardVector()*10.f;
+
+	if (WorldPosition == ActualPosition)
+	{
+		Debug::PrintMessage(TEXT("The Position of the point is  the same and transformation matrix works"));
+	}
+	else
+	{
+		Debug::PrintMessage(TEXT(" It dosen't work"));
+	}
+}
+
+void UMathComponent::WorldToLocal()
+{
+	// the world position
+	FVector WorldPosition = Owner->GetActorLocation()+Owner->GetActorRightVector()*10.f;
+
+	FTransform ActorTransform = Owner->GetActorTransform();
+	ActorTransform.RemoveScaling();
+	FVector LocalTranformPos = ActorTransform.InverseTransformPosition(WorldPosition);
+	FVector LocalPos = FVector(0.f,10.f,0.f);
+	if (LocalPos == LocalTranformPos)
+	{
+		Debug::PrintMessage(TEXT("World To Local Works"));
+	}
+	else
+	{
+		Debug::PrintMessage(TEXT("World To Local dosen't work"));
+	}
+	
+}
 
 void UMathComponent::BeginPlay()
 {
@@ -22,6 +65,10 @@ void UMathComponent::BeginPlay()
 	 Owner = GetOwner();
 	checkf(Owner,TEXT("There must always be a valid owner for the actor component"));
 	checkf(Actor1 && Actor2,TEXT("There must always be a valid Actor 1 and 2 hard referneces"));
+
+	// here we use transform directly so no need to take care of translation;
+	LocalToWorld();
+	WorldToLocal();
 	// const FVector Dir = (Actor1->GetActorLocation() - Owner->GetActorLocation()).GetSafeNormal();
  //    const FVector Actor2Location = Actor2->GetActorLocation() - Owner->GetActorLocation();
 	// float length = FVector::DotProduct(Dir,Actor2Location);
